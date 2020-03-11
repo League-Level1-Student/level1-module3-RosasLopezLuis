@@ -25,6 +25,8 @@ public class Jukebox implements Runnable {
     public void run() {
 
 		// 1. Find an mp3 on your computer or on the Internet.
+    	new Song("https://freedownloads.last.fm/download/569264057/Get%2BGot.mp3");
+    	
 		// 2. Create a Song object for that mp3
 
 		// 3. Play the Song
@@ -36,6 +38,7 @@ public class Jukebox implements Runnable {
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
+    	
     }
     
     
