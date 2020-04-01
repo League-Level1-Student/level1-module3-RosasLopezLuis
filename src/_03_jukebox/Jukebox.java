@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -25,20 +27,22 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable  {
-
-    public void run() {
-
-		// 1. Find an mp3 on your computer or on the Internet.
-    	
-		// 2. Create a Song object for that mp3
+public class Jukebox  implements Runnable, ActionListener {
+JButton button1 = new JButton("Myron - Lil Uzi Vert");
+    	JButton button2 = new JButton("Love Sosa - Chief Keef");
+    	JButton button3 = new JButton("Who Dat Boy - Tyler, The Creator");
+    	JButton play = new JButton("PLAY");
+    	JButton pause = new JButton("PAUSE");
     	Song uzi = new Song("https://www.youtube.com/watch?v=Bt-brUAx3Uo");
     	Song chief = new Song("https://www.youtube.com/watch?v=RdrC-FrtwMI");
     	Song tyler = new Song("https://www.youtube.com/watch?v=FUXX55WqYZs");
-		// 3. Play the Song
+
+    public void run() {
     	uzi.play();
+		// 1. Find an mp3 on your computer or on the Internet.
     	
-    
+		// 2. Create a Song object for that mp3
+    	// 3. Play the Song
 		/*
 		 * 4. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -47,23 +51,45 @@ public class Jukebox implements Runnable  {
 		 * that was selected.
 		 */
     	JFrame frame = new JFrame();
-    	JButton button1 = new JButton("Myron - Lil Uzi Vert");
-    	JButton button2 = new JButton("Love Sosa - Chief Keef");
-    	JButton button3 = new JButton("Who Dat Boy - Tyler, The Creator");
+    	
     	JPanel panel = new JPanel();
     	frame.add(panel);
     	panel.add(button1);
     	panel.add(button2);
     	panel.add(button3);
+    	panel.add(play);
+    	panel.add(pause);
     	button1.add(loadImage("th.jpg"));
     	button2.add(loadImage("Lovesosa.jpg"));
     	button3.add(loadImage("WhoDatBoy911.jpg"));
+    	button1.addActionListener(this);
+    	button2.addActionListener(this);
+    	button3.addActionListener(this);
+    	pause.addActionListener(this);
     	frame.pack();
     	frame.setVisible(true);
-    	frame.setSize(1075,400);
-    		
+    	frame.setSize(1075,450);
+
     	
     }
+    
+    public void actionPerformed(ActionEvent e)
+    {
+    	
+		if (e.getSource() == button1) 		
+			uzi.play();
+		uzi.setDuration(60);
+		if (e.getSource() == button2)
+			chief.play();
+		if(e.getSource() == button3)
+			tyler.play();
+		if(e.getSource() == pause)
+			uzi.stop();
+		System.out.println("it works");
+			chief.stop();
+			tyler.stop();
+      }
+  
     
     
 	/* Use this method to add album covers to your Panel. */
